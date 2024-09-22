@@ -3,6 +3,7 @@ using Encapsulation.Employment;
 using System;
 using Encapsulation.Calendar;
 using Encapsulation.Banking;
+using Encapsulation.Extra;
 
 namespace Encapsulation;
 
@@ -53,6 +54,25 @@ public class Program
         Console.WriteLine($"Balance after withdrawal: {account.GetBalance()}");
 
         // Extra
+
+        Subscription subscription1 = new Subscription("Alice", TimeSpan.FromDays(30));
+        Subscription subscription2 = new Subscription("Bob", TimeSpan.FromDays(-5));
+
+        subscription1.DisplaySubscriptionDetails();
+        subscription2.DisplaySubscriptionDetails();
+
+        try
+        {
+            subscription1.ExtendSubscription(TimeSpan.FromDays(15));
+            subscription2.ExtendSubscription(TimeSpan.FromDays(10));
+            subscription2.ExtendSubscription(TimeSpan.FromDays(-3));
+        }
+        catch (ArgumentException ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+        subscription1.DisplaySubscriptionDetails();
+        subscription2.DisplaySubscriptionDetails();
 
     }
 }
